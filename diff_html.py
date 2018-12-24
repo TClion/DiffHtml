@@ -2,13 +2,20 @@ import hashlib
 import requests
 
 
-def diff_two_html(firsturl=None, secondurl=None):
+def get_html(firsturl=None, secondurl=None):
     try:
         firsthtml = requests.get(firsturl).content
         secondhtml = requests.get(secondurl).content
+        return (firsthtml, secondhtml)
     except Exception as e:
         print(e)
         return "request error"
+
+
+
+
+def diff_two_html(htmls):
+    firsthtml, secondhtml = htmls
     firstmd5 = hashlib.md5()
     firstmd5.update(firsthtml)
     firstmd5 = firstmd5.hexdigest()
@@ -24,5 +31,6 @@ def diff_two_html(firsturl=None, secondurl=None):
 if __name__ == '__main__':
     firsturl = 'http://www.baidu.com'
     secondurl = 'http://www.baidu.com'
-    diffresult = diff_two_html(firsturl, secondurl)
+    htmls = get_html(firsturl, secondurl)
+    diffresult = diff_two_html(htmls)
     print(diffresult)
