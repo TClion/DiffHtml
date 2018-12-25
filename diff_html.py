@@ -1,6 +1,8 @@
 import hashlib
 import requests
 
+from lxml import etree
+
 
 def get_html(firsturl=None, secondurl=None):
     try:
@@ -12,9 +14,7 @@ def get_html(firsturl=None, secondurl=None):
         return "request error"
 
 
-
-
-def diff_two_html(htmls):
+def md5_compare(htmls):
     firsthtml, secondhtml = htmls
     firstmd5 = hashlib.md5()
     firstmd5.update(firsthtml)
@@ -28,9 +28,22 @@ def diff_two_html(htmls):
         return "Two Html Unsame"
 
 
+def domtree_compare(htmls):
+    firsthtml, secondhtml = htmls
+    firstpage = etree.HTML(firsthtml)
+    secondpage = etree.HTML(secondhtml)
+    first_dom = firstpage.xpath('.')
+    second_dom = secondpage.xpath('.')
+    print(first_dom)
+    print(second_dom)
+    return first_dom == second_dom
+
+
+
 if __name__ == '__main__':
     firsturl = 'http://www.baidu.com'
     secondurl = 'http://www.baidu.com'
     htmls = get_html(firsturl, secondurl)
-    diffresult = diff_two_html(htmls)
-    print(diffresult)
+    # result = md5_compare(htmls)
+    result = domtree_compare(htmls)
+    print(result)
