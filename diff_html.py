@@ -32,8 +32,8 @@ def domtree_compare(htmls):
     firsthtml, secondhtml = htmls
     firstpage = etree.HTML(firsthtml)
     secondpage = etree.HTML(secondhtml)
-    first_dom = firstpage.xpath('.')
-    second_dom = secondpage.xpath('.')
+    first_dom = firstpage.xpath('//.')
+    second_dom = secondpage.xpath('//.')
     print(first_dom)
     print(second_dom)
     return first_dom == second_dom
