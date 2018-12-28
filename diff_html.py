@@ -34,11 +34,11 @@ def domtree_compare(htmls):
     secondpage = etree.HTML(secondhtml)
     first_dom = firstpage.xpath('//.')
     second_dom = secondpage.xpath('//.')
-    print(first_dom)
-    print(second_dom)
-    return first_dom == second_dom
-
-
+    if len(first_dom) == len(second_dom):
+        print('Two page dom number same')
+    else:
+        for f, s in zip(first_dom, second_dom):
+            print(f, s)
 
 if __name__ == '__main__':
     firsturl = 'http://www.baidu.com'
