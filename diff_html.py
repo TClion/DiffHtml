@@ -40,6 +40,7 @@ def domtree_compare(htmls):
         for f, s in zip(first_dom, second_dom):
             print(f, s)
 
+
 if __name__ == '__main__':
     firsturl = 'http://www.baidu.com'
     secondurl = 'http://www.baidu.com'
